@@ -55,6 +55,12 @@ class ViewController: UIViewController {
                 right: 0
             )
         }
+        tagsField.onDidAddTagView = { (field, tag, tagView) in
+            if !tag.text.contains("@") {
+                tagView.tintColor = .red
+            }
+        }
+
         textFieldEvents()
     }
 
@@ -137,6 +143,13 @@ extension ViewController {
 
         tagsField.onShouldAcceptTag = { field in
             return field.text != "OMG"
+        }
+
+        tagsField.onDidAddTagView = { _, tag, tagView in
+            print("onDidAddTagView")
+            if !tag.text.contains("@") {
+                tagView.tintColor = .red
+            }
         }
     }
 
