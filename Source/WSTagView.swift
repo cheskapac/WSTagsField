@@ -63,15 +63,19 @@ open class WSTagView: UIView, UITextInputTraits {
     }
 
     /// Background color to be used for selected state.
-    open var selectedColor: UIColor? {
+    open var normalBackgroundColor: UIColor? {
         didSet { updateContent(animated: false) }
     }
 
-    open var textColor: UIColor? {
+    open var normalForegroundColor: UIColor? {
         didSet { updateContent(animated: false) }
     }
 
-    open var selectedTextColor: UIColor? {
+    open var selectedBackgroundColor: UIColor? {
+        didSet { updateContent(animated: false) }
+    }
+
+    open var selectedForegroundColor: UIColor? {
         didSet { updateContent(animated: false) }
     }
 
@@ -110,9 +114,10 @@ open class WSTagView: UIView, UITextInputTraits {
         self.layer.cornerRadius = cornerRadius
         self.layer.masksToBounds = true
 
-        textColor = .white
-        selectedColor = .gray
-        selectedTextColor = .black
+        normalBackgroundColor = .lightGray
+        normalForegroundColor = .white
+        selectedBackgroundColor = .gray
+        selectedForegroundColor = .black
 
         textLabel.frame = CGRect(x: layoutMargins.left, y: layoutMargins.top, width: 0, height: 0)
         textLabel.font = font
@@ -136,8 +141,8 @@ open class WSTagView: UIView, UITextInputTraits {
     // MARK: - Styling
 
     fileprivate func updateColors() {
-        self.backgroundColor = selected ? selectedColor : tintColor
-        textLabel.textColor = selected ? selectedTextColor : textColor
+        self.backgroundColor = selected ? selectedBackgroundColor : normalBackgroundColor
+        textLabel.textColor = selected ? selectedForegroundColor : normalForegroundColor
     }
 
     internal func updateContent(animated: Bool) {

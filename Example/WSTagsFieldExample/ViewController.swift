@@ -35,19 +35,25 @@ class ViewController: UIViewController {
         tagsField.contentInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10) //old padding
 
         tagsField.placeholder = "Enter a tag"
-        tagsField.placeholderColor = .red
+        tagsField.placeholderColor = .lightGray
         tagsField.placeholderAlwaysVisible = true
-        tagsField.backgroundColor = .lightGray
+        tagsField.backgroundColor = .clear
         tagsField.returnKeyType = .continue
         tagsField.delimiter = ""
 
         tagsField.textDelegate = self
 
+        tagsField.tagBackgroundColor = .brown
+        tagsField.tagForegroundColor = .cyan
+        tagsField.selectedTagBackgroundColor = .cyan
+        tagsField.selectedTagForegroundColor = .brown
+        tagsField.tintColor = .red
+
         tagsField.addTag("Tags:")
         if let tagView = tagsField.tagViews.first {
             tagView.isDeletable = false
-            tagView.tintColor = .clear
-            tagView.textColor = .black
+            tagView.normalBackgroundColor = .clear
+            tagView.normalForegroundColor = .black
             tagView.layoutMargins = UIEdgeInsets(
                 top: tagsField.layoutMargins.top,
                 left: 0,
@@ -86,9 +92,10 @@ class ViewController: UIViewController {
         tagsField.spaceBetweenLines = 2
         tagsField.spaceBetweenTags = 2
         tagsField.tintColor = .red
-        tagsField.textColor = .blue
-        tagsField.selectedColor = .yellow
-        tagsField.selectedTextColor = .black
+        tagsField.tagForegroundColor = .blue
+        tagsField.tagBackgroundColor = .lightGray
+        tagsField.selectedTagBackgroundColor = .yellow
+        tagsField.selectedTagForegroundColor = .black
         tagsField.delimiter = ","
         tagsField.isDelimiterVisible = true
         tagsField.borderWidth = 2
