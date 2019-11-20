@@ -10,6 +10,8 @@ import UIKit
 
 open class WSTagView: UIView, UITextInputTraits {
 
+    open var isDeletable: Bool = true
+
     fileprivate let textLabel = UILabel()
 
     open var displayText: String = "" {

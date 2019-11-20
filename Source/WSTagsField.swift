@@ -493,14 +493,14 @@ open class WSTagsField: UIScrollView {
         }
 
         let prevIndex = tagViews.index(before: selectedIndex)
-        if prevIndex >= 0 {
+        if prevIndex >= 0, tagViews[prevIndex].isDeletable {
             tagViews[selectedIndex].selected = false
             tagViews[prevIndex].selected = true
         }
     }
 
     open func selectTagView(_ tagView: WSTagView, animated: Bool = false) {
-        if self.readOnly {
+        if self.readOnly, !tagView.isDeletable {
             return
         }
 
@@ -622,7 +622,7 @@ extension WSTagsField {
                 return
             }
 
-            if self?.isTextFieldEmpty ?? true, let tagView = self?.tagViews.last {
+            if self?.isTextFieldEmpty ?? true, let tagView = self?.tagViews.last, tagView.isDeletable {
                 self?.selectTagView(tagView, animated: true)
                 self?.textField.resignFirstResponder()
             }
