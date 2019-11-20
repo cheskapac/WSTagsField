@@ -212,6 +212,9 @@ open class WSTagsField: UIScrollView {
     /// Called when a tag has been added. You should use this opportunity to update your local list of selected items.
     open var onDidAddTag: ((WSTagsField, _ tag: WSTag) -> Void)?
 
+    /// Called when a tagView has been added.
+    open var onDidAddTagView: ((WSTagsField, _ tag: WSTag, _ tagView: WSTagView) -> Void)?
+
     /// Called when a tag has been removed. You should use this opportunity to update your local list of selected items.
     open var onDidRemoveTag: ((WSTagsField, _ tag: WSTag) -> Void)?
 
@@ -412,6 +415,7 @@ open class WSTagsField: UIScrollView {
 
         self.textField.text = ""
         onDidAddTag?(self, tag)
+        onDidAddTagView?(self, tag, tagView)
 
         // Clearing text programmatically doesn't call this automatically
         onTextFieldDidChange(self.textField)
