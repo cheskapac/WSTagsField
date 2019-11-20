@@ -43,6 +43,18 @@ class ViewController: UIViewController {
 
         tagsField.textDelegate = self
 
+        tagsField.addTag("Tags:")
+        if let tagView = tagsField.tagViews.first {
+            tagView.isDeletable = false
+            tagView.tintColor = .clear
+            tagView.textColor = .black
+            tagView.layoutMargins = UIEdgeInsets(
+                top: tagsField.layoutMargins.top,
+                left: 0,
+                bottom: tagsField.layoutMargins.bottom,
+                right: 0
+            )
+        }
         textFieldEvents()
     }
 
