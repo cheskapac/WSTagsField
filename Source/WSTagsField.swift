@@ -8,10 +8,16 @@
 
 import UIKit
 
-public enum WSTagAcceptOption {
-    case `return`
-    case comma
-    case space
+public struct WSTagAcceptOption: OptionSet {
+    static public let `return` = WSTagAcceptOption(rawValue: 1 << 0)
+    static public let comma = WSTagAcceptOption(rawValue: 1 << 1)
+    static public let space = WSTagAcceptOption(rawValue: 1 << 2)
+
+    public let rawValue: Int
+
+    public init(rawValue: Int) {
+        self.rawValue = rawValue
+    }
 }
 
 open class WSTagsField: UIScrollView {
@@ -793,7 +799,7 @@ extension WSTagsField: UITextFieldDelegate {
         if let onShouldAcceptTag = onShouldAcceptTag, !onShouldAcceptTag(self) {
             return false
         }
-        if !isTextFieldEmpty, acceptTagOption == .return {
+        if !isTextFieldEmpty, acceptTagOption.contains(.return) {
             tokenizeTextFieldText()
             return true
         }
@@ -801,11 +807,11 @@ extension WSTagsField: UITextFieldDelegate {
     }
 
     public func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        if acceptTagOption == .comma && string == "," && onShouldAcceptTag?(self) ?? true {
+        if acceptTagOption.contains(.comma) && string == "," && onShouldAcceptTag?(self) ?? true {
             tokenizeTextFieldText()
             return false
         }
-        if acceptTagOption == .space && string == " " && onShouldAcceptTag?(self) ?? true {
+        if acceptTagOption.contains(.space) && string == " " && onShouldAcceptTag?(self) ?? true {
             tokenizeTextFieldText()
             return false
         }

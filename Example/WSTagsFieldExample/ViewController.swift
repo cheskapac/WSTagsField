@@ -40,6 +40,7 @@ class ViewController: UIViewController {
         tagsField.backgroundColor = .clear
         tagsField.returnKeyType = .continue
         tagsField.delimiter = ""
+        tagsField.acceptTagOption = [.comma, .space, .return]
 
         tagsField.textDelegate = self
 
@@ -66,6 +67,8 @@ class ViewController: UIViewController {
                 tagView.tintColor = .red
             }
         }
+
+        tagsField.becomeFirstResponder()
 
         textFieldEvents()
     }
